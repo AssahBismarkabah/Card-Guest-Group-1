@@ -57,13 +57,11 @@ if __name__ == '__main__':
     WINDOW_WIDTH = 100
     WINDOW_HEIGHT = 100
 
+
     pygame.init()
     window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
 
     oDeck = Deck(window)
     for i in range(1, 53):
         oCard = oDeck.getCard()
-
-        print('Name: ', oCard.getName(), '  Value:', oCard.getValue())
-
         print('Name: ', oCard.getName(), '  Value:', oCard.getValue())
