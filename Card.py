@@ -5,15 +5,18 @@ import pygwidgets
 
 class Card():
     Back_Of_Card = pygame.image.load("BackOfCard.png")
+
     def __init__(self, window, rank, suit, value):
         self.window = window
         self.rank = rank
         self.suit = suit
         self.value = value
+        self.is_concealed = False
         self.cardname = rank + 'of' + suit
-        self.images = pygwidgets.ImageCollection(window, (0, 0),{'front': fileName,'back': Card.Back_Of_Card}, 'back')
+        
         fileName = 'images/' + self.cardname + '.png'
 
+        self.images = pygwidgets.ImageCollection(window, (0, 0),{'front': fileName,'back': Card.Back_Of_Card}, 'back')
 
 
     def conceal(self):
