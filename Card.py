@@ -11,7 +11,6 @@ class Card():
         self.rank = rank
         self.suit = suit
         self.value = value
-        self.is_concealed = False
         self.cardname = rank + 'of' + suit
         
         fileName = 'images/' + self.cardname + '.png'
