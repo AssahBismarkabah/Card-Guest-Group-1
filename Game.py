@@ -12,6 +12,8 @@ class Game():
     NCARDS = 8
     POINTS_CORRECT = 15
     POINTS_INCORRECT = 10
+    POINTS_EQUAL = 25
+    POINTS_UNEQUAL = 20
 
     def __init__(self, window):
         self.window = window
@@ -86,9 +88,26 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not higher')
                 self.loserSound.play()
+# user hit the EQUAL Button
 
-        elif higherOrLower == LOWER:# user hit the Lower button
+
+        elif higherOrLower == EQUAL:
+            
+            if nextCardValue == self.currentCardValue:
+             self.score = self.score + Game.POINTS_EQUAL
+             self.messageText.setValue('Yes, the ' + nextCardName + ' was equal')
+             self.winnerSound.play()
+             
+            else:
+                    self.score = self.score - Game.POINTS_UNEQUAL
+                    self.messageText.setValue('No, the ' + nextCardName + ' was not equal')
+                    self.loserSound.play()
+                
+    
+        elif higherOrLower == LOWER: # user hit the Lower button
+
             if nextCardValue < self.currentCardValue:
+                nextCardValue < self.currentCardValue
                 self.score = self.score + Game.POINTS_CORRECT
                 self.messageText.setValue('Yes, the ' + nextCardName + ' was lower')
                 self.winnerSound.play()
@@ -96,18 +115,7 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
-        elif higherOrLower == EQUAL:  # user hits equal
-            if nextCardValue == self.currentCardValue:
-                self.score = self.score + Game.POINTS_CORRECT + 10
-                self.messageText.setValue('Yes, the ' + nextCardName + ' was equal to the current')
-                self.winnerSound.play()
-            else:
-                self.score = self.score - Game.POINTS_INCORRECT - 10
-                self.messageText.setValue('No, the ' + nextCardName + ' was not equal: high risk')
-                self.loserSound.play()
-        else:
-            self.messageText.setValue('please click on the buttons not outside the range ')
-
+        
 
 
         self.scoreText.setValue('Score: ' + str(self.score))

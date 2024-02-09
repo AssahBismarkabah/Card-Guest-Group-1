@@ -56,18 +56,21 @@ while True:
             if gameOver:
                 higherButton.disable()
                 lowerButton.disable()
+                equalButton.disable()
 
         if lowerButton.handleEvent(event):
             gameOver = oGame.hitHigherOrLower(LOWER)
             if gameOver:
                 higherButton.disable()
                 lowerButton.disable()
+                equalButton.disable()
             # handle event when user clicks on equal button
         if equalButton.handleEvent(event):
             gameOver = oGame.hitHigherOrLower(EQUAL)
             if gameOver:
                 higherButton.disable()
                 lowerButton.disable()
+                equalButton.disable()
 
     # 8 - Do any "per frame" actions
 
