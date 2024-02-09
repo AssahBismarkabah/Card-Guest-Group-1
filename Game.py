@@ -86,9 +86,24 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not higher')
                 self.loserSound.play()
+# user hit the EQUAL Button
 
-        else:  # user hit the Lower button
+        elif higherOrLower == EQUAL:
+            
+            if nextCardValue == self.currentCardValue:
+             self.score = self.score + 15
+             self.messageText.setValue('Yes, the ' + nextCardName + ' was equal')
+             self.winnerSound.play()
+             
+            else:
+                    self.score = self.score - Game.POINTS_INCORRECT
+                    self.messageText.setValue('No, the ' + nextCardName + ' was not equal')
+                    self.loserSound.play()
+                
+            
+        elif higherOrLower == LOWER:
             if nextCardValue < self.currentCardValue:
+                nextCardValue < self.currentCardValue
                 self.score = self.score + Game.POINTS_CORRECT
                 self.messageText.setValue('Yes, the ' + nextCardName + ' was lower')
                 self.winnerSound.play()
@@ -96,6 +111,7 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
+        
 
         self.scoreText.setValue('Score: ' + str(self.score))
 
