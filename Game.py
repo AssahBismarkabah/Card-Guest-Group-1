@@ -12,6 +12,8 @@ class Game():
     NCARDS = 8
     POINTS_CORRECT = 15
     POINTS_INCORRECT = 10
+    POINTS_EQUAL = 25
+    POINTS_UNEQUAL = 20
 
     def __init__(self, window):
         self.window = window
@@ -88,20 +90,22 @@ class Game():
                 self.loserSound.play()
 # user hit the EQUAL Button
 
+
         elif higherOrLower == EQUAL:
             
             if nextCardValue == self.currentCardValue:
-             self.score = self.score + 15
+             self.score = self.score + Game.POINTS_EQUAL
              self.messageText.setValue('Yes, the ' + nextCardName + ' was equal')
              self.winnerSound.play()
              
             else:
-                    self.score = self.score - Game.POINTS_INCORRECT
+                    self.score = self.score - Game.POINTS_UNEQUAL
                     self.messageText.setValue('No, the ' + nextCardName + ' was not equal')
                     self.loserSound.play()
                 
-            
-        elif higherOrLower == LOWER:
+    
+        elif higherOrLower == LOWER: # user hit the Lower button
+
             if nextCardValue < self.currentCardValue:
                 nextCardValue < self.currentCardValue
                 self.score = self.score + Game.POINTS_CORRECT
@@ -112,6 +116,7 @@ class Game():
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
         
+
 
         self.scoreText.setValue('Score: ' + str(self.score))
 
