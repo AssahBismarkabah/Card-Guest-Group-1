@@ -19,7 +19,8 @@ class Game():
         self.window = window
         self.oDeck = Deck(self.window)
         self.score = 100
-        self.scoreText = pygwidgets.DisplayText(window, (450, 164),
+        self.compare = 200
+        self.scoreText = pygwidgets.DisplayText(window, (300, 164),
                                    'Score: ' + str(self.score),
                                     fontSize=36, textColor=WHITE,
                                     justified='right')
@@ -28,6 +29,12 @@ class Game():
                                     '', width=900, justified='center',
                                     fontSize=36, textColor=WHITE)
 
+        self.compareText = pygwidgets.DisplayText(window, (500, 164),
+                                   'target: ' + str(self.compare),
+                                    fontSize=36, textColor=WHITE,
+                                    justified='left')
+
+        self.congratulation = pygame.mixer.Sound("sounds/Congratulations.wav")
         self.loserSound = pygame.mixer.Sound("sounds/loser.wav")
         self.winnerSound = pygame.mixer.Sound("sounds/ding.wav")
         self.cardShuffleSound = pygame.mixer.Sound("sounds/cardShuffle.wav")
@@ -55,11 +62,14 @@ class Game():
 
         self.showCard(0)
         self.cardNumber = 0
+        self.compare = 200
         self.currentCardName, self.currentCardValue = \
                                          self.getCardNameAndValue(self.cardNumber)
 
         self.messageText.setValue('Starting card is ' + self.currentCardName +
                                                 '. Will the next card be higher or lower?')
+
+        self.compareText.setValue(f"TargetPoint: {self.compare}")
 
     def getCardNameAndValue(self, index):
         oCard = self.cardList[index]
@@ -78,6 +88,7 @@ class Game():
         self.showCard(self.cardNumber)
         nextCardName, nextCardValue = self.getCardNameAndValue(self.cardNumber)
         
+
 
         if higherOrLower == HIGHER:
             if nextCardValue > self.currentCardValue:
@@ -132,3 +143,4 @@ class Game():
 
         self.scoreText.draw()
         self.messageText.draw()
+        self.compareText.draw()
