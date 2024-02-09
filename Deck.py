@@ -63,4 +63,7 @@ if __name__ == '__main__':
     oDeck = Deck(window)
     for i in range(1, 53):
         oCard = oDeck.getCard()
+
+        print('Name: ', oCard.getName(), '  Value:', oCard.getValue())
+
         print('Name: ', oCard.getName(), '  Value:', oCard.getValue())
