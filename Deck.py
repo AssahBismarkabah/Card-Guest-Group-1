@@ -19,23 +19,13 @@ class Deck():
         # create the cards and save in an array using a loop to
         # iterate through the suit, rank and value and append each
         # card object in a list to create a full deck of carda
-        self.startingDeckList = []
-        self.playingDeckList = []
-        for suit in Deck.SUIT_TUPLE:
-            for rank, value in rankValueDict.items():
-                oCard = Card(window, rank, suit, value)
-                self.startingDeckList.append(oCard)
 
-        self.shuffle()
 
     def shuffle(self):
 
         # Copy the starting deck and save it in the playing decklist but before that all
         # cards should be concealed(faced down)
-        self.playingDeckList = self.startingDeckList.copy()
-        for oCard in self.playingDeckList:
-            oCard.conceal()
-        random.shuffle(self.playingDeckList)
+
 
     def getCard(self):
         if len(self.playingDeckList) == 0:

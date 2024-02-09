@@ -87,7 +87,7 @@ class Game():
                 self.messageText.setValue('No, the ' + nextCardName + ' was not higher')
                 self.loserSound.play()
 
-        elif higherOrLower == LOWER: # user hit the Lower button
+        elif higherOrLower == LOWER:# user hit the Lower button
             if nextCardValue < self.currentCardValue:
                 self.score = self.score + Game.POINTS_CORRECT
                 self.messageText.setValue('Yes, the ' + nextCardName + ' was lower')
@@ -96,6 +96,18 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
+        elif higherOrLower == EQUAL:  # user hits equal
+            if nextCardValue == self.currentCardValue:
+                self.score = self.score + Game.POINTS_CORRECT + 10
+                self.messageText.setValue('Yes, the ' + nextCardName + ' was equal to the current')
+                self.winnerSound.play()
+            else:
+                self.score = self.score - Game.POINTS_INCORRECT - 10
+                self.messageText.setValue('No, the ' + nextCardName + ' was not equal: high risk')
+                self.loserSound.play()
+        else:
+            self.messageText.setValue('please click on the buttons not outside the range ')
+
 
 
         self.scoreText.setValue('Score: ' + str(self.score))
