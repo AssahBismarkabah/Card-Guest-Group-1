@@ -12,12 +12,15 @@ class Game():
     NCARDS = 8
     POINTS_CORRECT = 15
     POINTS_INCORRECT = 10
+    POINTS_EQUAL = 25
+    POINTS_UNEQUAL = 20
 
     def __init__(self, window):
         self.window = window
         self.oDeck = Deck(self.window)
         self.score = 100
-        self.scoreText = pygwidgets.DisplayText(window, (450, 164),
+        self.compare = 200
+        self.scoreText = pygwidgets.DisplayText(window, (300, 164),
                                    'Score: ' + str(self.score),
                                     fontSize=36, textColor=WHITE,
                                     justified='right')
@@ -26,6 +29,12 @@ class Game():
                                     '', width=900, justified='center',
                                     fontSize=36, textColor=WHITE)
 
+        self.compareText = pygwidgets.DisplayText(window, (500, 164),
+                                   'target: ' + str(self.compare),
+                                    fontSize=36, textColor=WHITE,
+                                    justified='left')
+
+        self.congratulation = pygame.mixer.Sound("sounds/Congratulations.wav")
         self.loserSound = pygame.mixer.Sound("sounds/loser.wav")
         self.winnerSound = pygame.mixer.Sound("sounds/ding.wav")
         self.cardShuffleSound = pygame.mixer.Sound("sounds/cardShuffle.wav")
@@ -53,11 +62,14 @@ class Game():
 
         self.showCard(0)
         self.cardNumber = 0
+        self.compare = 200
         self.currentCardName, self.currentCardValue = \
                                          self.getCardNameAndValue(self.cardNumber)
 
         self.messageText.setValue('Starting card is ' + self.currentCardName +
                                                 '. Will the next card be higher or lower?')
+
+        self.compareText.setValue(f"TargetPoint: {self.compare}")
 
     def getCardNameAndValue(self, index):
         oCard = self.cardList[index]
@@ -77,6 +89,7 @@ class Game():
         nextCardName, nextCardValue = self.getCardNameAndValue(self.cardNumber)
         
 
+
         if higherOrLower == HIGHER:
             if nextCardValue > self.currentCardValue:
                 self.score = self.score + Game.POINTS_CORRECT
@@ -86,9 +99,26 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not higher')
                 self.loserSound.play()
+# user hit the EQUAL Button
 
-        else:  # user hit the Lower button
+
+        elif higherOrLower == EQUAL:
+            
+            if nextCardValue == self.currentCardValue:
+             self.score = self.score + Game.POINTS_EQUAL
+             self.messageText.setValue('Yes, the ' + nextCardName + ' was equal')
+             self.winnerSound.play()
+             
+            else:
+                    self.score = self.score - Game.POINTS_UNEQUAL
+                    self.messageText.setValue('No, the ' + nextCardName + ' was not equal')
+                    self.loserSound.play()
+                
+    
+        elif higherOrLower == LOWER: # user hit the Lower button
+
             if nextCardValue < self.currentCardValue:
+                nextCardValue < self.currentCardValue
                 self.score = self.score + Game.POINTS_CORRECT
                 self.messageText.setValue('Yes, the ' + nextCardName + ' was lower')
                 self.winnerSound.play()
@@ -96,6 +126,8 @@ class Game():
                 self.score = self.score - Game.POINTS_INCORRECT
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
+        
+
 
         self.scoreText.setValue('Score: ' + str(self.score))
 
@@ -111,3 +143,4 @@ class Game():
 
         self.scoreText.draw()
         self.messageText.draw()
+        self.compareText.draw()
