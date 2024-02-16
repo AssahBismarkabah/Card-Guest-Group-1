@@ -50,6 +50,7 @@ while True:
             oGame.reset()
             lowerButton.enable()
             higherButton.enable()
+            equalButton.enable()
 
         if higherButton.handleEvent(event):
             gameOver = oGame.hitHigherOrLower(HIGHER)
