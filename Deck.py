@@ -48,8 +48,9 @@ class Deck():
         return oCard
 
 
+ # Main code to test the Deck class
+
 if __name__ == '__main__':
-    # Main code to test the Deck class
 
     import pygame
 
