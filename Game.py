@@ -124,8 +124,13 @@ class Game():
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
 
+        # congratulation sound if score is greater than <200>compare
+
         if self.score >= self.compare:
             self.congratulation.play()
+        # else play loser sound
+        # else:
+        # self.loserSound.play()
 
         self.scoreText.setValue('Score: ' + str(self.score))
 
