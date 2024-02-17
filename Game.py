@@ -124,6 +124,9 @@ class Game():
                 self.messageText.setValue('No, the ' + nextCardName + ' was not lower')
                 self.loserSound.play()
 
+        if self.score >= self.compare:
+            self.congratulation.play()
+
         self.scoreText.setValue('Score: ' + str(self.score))
 
         self.currentCardValue = nextCardValue  # set up for the next card 
