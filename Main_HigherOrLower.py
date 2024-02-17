@@ -17,6 +17,7 @@ FRAMES_PER_SECOND = 30
 pygame.init()
 clock = pygame.time.Clock()
 window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+pygame.display.set_caption("Higher Or Lower")
 
 # 4 - Load assets: image(s), sounds,  etc.
 background = pygwidgets.Image(window, (0, 0),
